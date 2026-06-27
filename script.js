@@ -9,7 +9,7 @@ async function getweather() {
     result.innerHTML="Loading..."
 
     try{
-        const geo_response= await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`);
+        const geo_response= await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`);
         const geo_data= await geo_response.json();
 
         if(!geo_data.results || geo_data.results.length === 0){
