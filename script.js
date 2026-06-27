@@ -22,11 +22,12 @@ async function getweather() {
         const city_name=geo_data.results[0].name;
         const country=geo_data.results[0].country;
 
-        const weather_response=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,wind_speed_10m,wind_direction_10m`);
+        const weather_response=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,wind_speed_10m,wind_direction_10m&timezone=auto`);
         const weather_data=await weather_response.json();
 
         const weather=weather_data.current;
 
+        const formatted_time=new Date(weather.time).toLocaleString();
 
         result.innerHTML=`
             <div class="weather">
@@ -45,7 +46,7 @@ async function getweather() {
                 </p>
 
                 <p>
-                    Time: ${weather.time}
+                    Time: ${formatted_time}
                 </p>
             </div>
         `;
